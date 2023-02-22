@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Todo;
+use App\Todo;
 
 
 class TodosController extends Controller
@@ -15,12 +15,12 @@ class TodosController extends Controller
      */
     public function index()
     {
-        
-        return view('todos.index');
+        $todos = Todo::all();
+        return view('todos.index')->with('todos',$todos);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new resource
      *
      * @return \Illuminate\Http\Response
      */
