@@ -46,9 +46,9 @@ class TodosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($todoId)
     {
-        //
+        return view('todos.show')->with('todo', Todo::find($todoId));
     }
 
     /**
