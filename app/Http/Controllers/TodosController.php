@@ -38,10 +38,10 @@ class TodosController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(), [
-            'name' => 'required|min:6|max:12',
+            'name' => 'required|min:6|max:1200',
             'description' => 'required'
         ]);
-        
+
         $data = request()->all();
 
         $todo = new Todo();
@@ -70,9 +70,9 @@ class TodosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($todoId)
     {
-        //
+        return view('todos.edit')->with('todo', Todo::find($todoId));
     }
 
     /**
@@ -82,9 +82,22 @@ class TodosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($todoId)
     {
-        //
+        $this->validate(request(), [
+            'name' => 'required|min:6|max:1200',
+            'description' => 'required'
+        ]);
+
+        $data = request()->all();
+
+        $todo = Todo::find($todoId);
+        $todo->name = $data['name'];
+        $todo->description = $data['description'];
+
+        $todo->save();
+        return redirect('/todos');
+
     }
 
     /**
