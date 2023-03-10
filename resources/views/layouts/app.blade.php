@@ -48,6 +48,13 @@
       {{ session()->get('delete-success') }}
     </div>
     @endif
+    @if(session()->has('complete-success'))
+    <div class="alert alert-success">
+      {{ session()->get('complete-success') }}
+    </div>
+    @endif
+
+
     @yield('content')
   </div>
 </body>

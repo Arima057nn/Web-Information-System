@@ -115,4 +115,14 @@ class TodosController extends Controller
         session()->flash('delete-success', "Todo delete successfully");
         return redirect('/todos');
     }
+
+    public function complete(Todo $todo)
+    {
+        $todo->completed = true;
+        $todo->save();
+
+        session()->flash('complete-success', 'Todo completed successfully.');
+
+        return redirect('/todos');
+    }
 }
