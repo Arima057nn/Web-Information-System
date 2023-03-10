@@ -16,7 +16,7 @@ class TodosController extends Controller
     public function index()
     {
         $todos = Todo::all();
-        return view('todos.index')->with('todos',$todos);
+        return view('todos.index')->with('todos', $todos);
     }
 
     /**
@@ -49,7 +49,9 @@ class TodosController extends Controller
         $todo->description = $data['description'];
         $todo->completed = false;
 
+
         $todo->save();
+        session()->flash('create-success', "Todo created successfully");
         return redirect('/todos');
     }
 
@@ -91,13 +93,13 @@ class TodosController extends Controller
 
         $data = request()->all();
 
-        
+
         $todo->name = $data['name'];
         $todo->description = $data['description'];
 
         $todo->save();
+        session()->flash('update-success', "Todo update successfully");
         return redirect('/todos');
-
     }
 
     /**
@@ -110,7 +112,7 @@ class TodosController extends Controller
     {
 
         $todo->delete();
-
+        session()->flash('delete-success', "Todo delete successfully");
         return redirect('/todos');
     }
 }
